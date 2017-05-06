@@ -4,7 +4,8 @@
 	<meta charset="UTF-8">
 	<title></title>
 	<link rel="stylesheet" href="../css/app.css">
-	<script src="../js/jquery.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/app.js"></script>
 	<script src="../js/carInfo.js"></script>
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 </head>
@@ -24,8 +25,20 @@
 				<li><a href="">退出</a></li>
 			</ul>
 		</div>
-
-		<div class="modal"></div>
-	</nav>
+    </nav>
+    <!-- Large modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1>modal-header</h1>
+                </div>
+				<div class="modal-body">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, explicabo illo illum ipsa laboriosam minus molestias! Debitis hic itaque laboriosam magni, modi provident quidem totam ut. Adipisci corporis iste nemo.</p>
+				</div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
