@@ -27,18 +27,41 @@
 		</div>
     </nav>
     <!-- Large modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="myModal" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1>modal-header</h1>
                 </div>
 				<div class="modal-body">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, explicabo illo illum ipsa laboriosam minus molestias! Debitis hic itaque laboriosam magni, modi provident quidem totam ut. Adipisci corporis iste nemo.</p>
 				</div>
             </div>
         </div>
     </div>
+
+	<script>
+		function carInfo(){
+			$.ajax({
+				method:'POST',
+				url:'localhost:8080/restful/users',
+				contentType: "application/json; charset=utf-8",
+				dataType:"json",
+				data:JSON.stringify({
+					"username":"韩世荣",
+					"password":"001"
+				}),
+				success:function(data){
+					if(data>1)
+                        $("modal-body").append("<p>"+data+"</p>");
+				},
+				error:function(){
+					alert('error');
+				}
+			});
+			$("#myModal").modal({
+				keyboard:true
+			});
+		};
+	</script>
 </body>
 </html>
