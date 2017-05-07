@@ -59,14 +59,14 @@ class db
     }
 
     //获取分页信息
-    public function GetList($sql, $page=1, $offset = 10){
+    public function GetList($sql, $page=1, $offset = 10,$debug = false){
         if($offset >100){
             throw new Exception("每个页面最多只能显示100行");
         }
         $page = ($page-1) * $offset;
         $page = $page < 0 ? 0 : $page;
         $sql .= " LIMIT ".$page.",".$offset;
-        return $this->Query($sql,'many',false);
+        return $this->Query($sql,'many',$debug);
     }
 
     /**
@@ -81,12 +81,15 @@ class db
             $sql .=",`$k`='$v'";
         }
         $sql = substr($sql,1);
-        $sql = "INSERT INTO `$table` SET `$sql`";
+        $sql = "INSERT INTO `$table` SET $sql";
         if($debug){
             exit($sql);
         }
-        if(self::$_db->exec($sql)){
+        try{
+            self::$_db->exec($sql);
             return self::$_db->lastInsertId();
+        }catch (PDOException $e){
+            exit("PDO Error:".$e->getMessage());
         }
         return false;
     }

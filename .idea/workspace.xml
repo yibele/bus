@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4179a0d5-0cd0-4dfe-90a9-a4199e3a5913" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Vue/index.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/front/js/carInfo.js" afterPath="$PROJECT_DIR$/front/js/carInfo.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/front/layouts/main.php" afterPath="$PROJECT_DIR$/front/layouts/main.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/Messages.php" afterPath="$PROJECT_DIR$/lib/Messages.php" />
@@ -43,9 +43,13 @@
       <file leaf-file-name="main.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/front/layouts/main.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.32142857">
-              <caret line="86" column="9" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
-              <folding />
+            <state vertical-scroll-proportion="-16.035715">
+              <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
+              <folding>
+                <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#script#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -63,21 +67,9 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/front/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.32142857">
-              <caret line="5" column="48" selection-start-line="5" selection-start-column="48" selection-end-line="5" selection-end-column="48" />
+            <state vertical-scroll-proportion="-15.107142">
+              <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="db.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/db.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8172531">
-              <caret line="95" column="20" selection-start-line="95" selection-start-column="20" selection-end-line="95" selection-end-column="20" />
-              <folding>
-                <marker date="1494125642000" expanded="true" signature="2088:2119" placeholder="INSERT INTO `${$table}`..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -85,15 +77,29 @@
       <file leaf-file-name="Messages.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/Messages.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.0">
-              <caret line="76" column="29" selection-start-line="76" selection-start-column="29" selection-end-line="76" selection-end-column="29" />
+            <state vertical-scroll-proportion="2.8214285">
+              <caret line="32" column="53" selection-start-line="32" selection-start-column="53" selection-end-line="32" selection-end-column="53" />
               <folding>
-                <marker date="1494124140000" expanded="true" signature="1668:1799" placeholder="INSERT INTO `busaccidentinformation`..." />
-                <marker date="1494124140000" expanded="true" signature="1668:1800" placeholder="INSERT INTO `busaccidentinformation`..." />
-                <marker date="1494124140000" expanded="true" signature="1668:1804" placeholder="INSERT INTO `busaccidentinformation`..." />
-                <marker date="1494124140000" expanded="true" signature="1668:2211" placeholder="INSERT INTO `busaccidentinformation`..." />
-                <marker date="1494124140000" expanded="true" signature="1953:2095" placeholder="/** *列出所有的调度..." />
-                <marker date="1494124140000" expanded="true" signature="2413:2561" placeholder="select name,..." />
+                <marker date="1494136868000" expanded="true" signature="528:535" placeholder="SELECT * FRO..." />
+                <marker date="1494136868000" expanded="true" signature="528:577" placeholder="SELECT count..busunusualbus..." />
+                <marker date="1494136868000" expanded="true" signature="528:592" placeholder="SELECT count..busunusualbus..." />
+                <marker date="1494136868000" expanded="true" signature="696:740" placeholder="SELECT * FRO..busunusualbus..." />
+                <marker date="1494136868000" expanded="true" signature="1976:2246" placeholder="INSERT INTO `busaccidentinformation`..." />
+                <marker date="1494136868000" expanded="true" signature="1988:2130" placeholder="/** *列出所有的调度..." />
+                <marker date="1494136868000" expanded="true" signature="2448:2596" placeholder="select name,..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="db.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/db.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-18.0">
+              <caret line="57" column="19" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
+              <folding>
+                <marker date="1494129180000" expanded="true" signature="2104:2129" placeholder="INSERT INTO `${$table}`..." />
+                <marker date="1494129180000" expanded="true" signature="2104:2133" placeholder="INSERT INTO `${$table}`..." />
               </folding>
             </state>
           </provider>
@@ -102,18 +108,18 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.714286">
-              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+            <state vertical-scroll-proportion="-10.285714">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/restful/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.32142857">
-              <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+            <state vertical-scroll-proportion="1.0624291">
+              <caret line="180" column="38" selection-start-line="180" selection-start-column="38" selection-end-line="180" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -149,11 +155,11 @@
         <option value="$PROJECT_DIR$/front/index.php" />
         <option value="$PROJECT_DIR$/front/js/app.js" />
         <option value="$PROJECT_DIR$/front/js/carInfo.js" />
-        <option value="$PROJECT_DIR$/front/layouts/main.php" />
+        <option value="$PROJECT_DIR$/lib/db.php" />
+        <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/restful/index.php" />
         <option value="$PROJECT_DIR$/lib/Messages.php" />
-        <option value="$PROJECT_DIR$/index.php" />
-        <option value="$PROJECT_DIR$/lib/db.php" />
+        <option value="$PROJECT_DIR$/front/layouts/main.php" />
       </list>
     </option>
   </component>
@@ -377,7 +383,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -393,7 +401,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -402,12 +414,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
           <folding>
-            <marker date="1494124140000" expanded="true" signature="1668:1799" placeholder="INSERT INTO `busaccidentinformation`..." />
-            <marker date="1494124140000" expanded="true" signature="1668:1800" placeholder="INSERT INTO `busaccidentinformation`..." />
-            <marker date="1494124140000" expanded="true" signature="1668:1804" placeholder="INSERT INTO `busaccidentinformation`..." />
-            <marker date="1494124140000" expanded="true" signature="1668:2211" placeholder="INSERT INTO `busaccidentinformation`..." />
-            <marker date="1494124140000" expanded="true" signature="1953:2095" placeholder="/** *列出所有的调度..." />
-            <marker date="1494124140000" expanded="true" signature="2413:2561" placeholder="select name,..." />
+            <marker date="1494136868000" expanded="true" signature="528:535" placeholder="SELECT * FRO..." />
+            <marker date="1494136868000" expanded="true" signature="528:577" placeholder="SELECT count..busunusualbus..." />
+            <marker date="1494136868000" expanded="true" signature="528:592" placeholder="SELECT count..busunusualbus..." />
+            <marker date="1494136868000" expanded="true" signature="696:740" placeholder="SELECT * FRO..busunusualbus..." />
+            <marker date="1494136868000" expanded="true" signature="1976:2246" placeholder="INSERT INTO `busaccidentinformation`..." />
+            <marker date="1494136868000" expanded="true" signature="1988:2130" placeholder="/** *列出所有的调度..." />
+            <marker date="1494136868000" expanded="true" signature="2448:2596" placeholder="select name,..." />
           </folding>
         </state>
       </provider>
@@ -432,7 +445,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -440,7 +457,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -487,7 +508,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -534,7 +559,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -581,7 +610,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -589,13 +622,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.0">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vue/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.380531">
-          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -655,37 +681,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front/layouts/main.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32142857">
-          <caret line="86" column="9" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/restful/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32142857">
-          <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Messages.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.0">
-          <caret line="76" column="29" selection-start-line="76" selection-start-column="29" selection-end-line="76" selection-end-column="29" />
-          <folding>
-            <marker date="1494124140000" expanded="true" signature="1668:1799" placeholder="INSERT INTO `busaccidentinformation`..." />
-            <marker date="1494124140000" expanded="true" signature="1668:1800" placeholder="INSERT INTO `busaccidentinformation`..." />
-            <marker date="1494124140000" expanded="true" signature="1668:1804" placeholder="INSERT INTO `busaccidentinformation`..." />
-            <marker date="1494124140000" expanded="true" signature="1668:2211" placeholder="INSERT INTO `busaccidentinformation`..." />
-            <marker date="1494124140000" expanded="true" signature="1953:2095" placeholder="/** *列出所有的调度..." />
-            <marker date="1494124140000" expanded="true" signature="2413:2561" placeholder="select name,..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/front/js/carInfo.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -696,27 +691,64 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/front/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32142857">
-          <caret line="5" column="48" selection-start-line="5" selection-start-column="48" selection-end-line="5" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.714286">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        <state vertical-scroll-proportion="-15.107142">
+          <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/db.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8172531">
-          <caret line="95" column="20" selection-start-line="95" selection-start-column="20" selection-end-line="95" selection-end-column="20" />
+        <state vertical-scroll-proportion="-18.0">
+          <caret line="57" column="19" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
           <folding>
-            <marker date="1494125642000" expanded="true" signature="2088:2119" placeholder="INSERT INTO `${$table}`..." />
+            <marker date="1494129180000" expanded="true" signature="2104:2129" placeholder="INSERT INTO `${$table}`..." />
+            <marker date="1494129180000" expanded="true" signature="2104:2133" placeholder="INSERT INTO `${$table}`..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.285714">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/layouts/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.035715">
+          <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
+          <folding>
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Messages.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.8214285">
+          <caret line="32" column="53" selection-start-line="32" selection-start-column="53" selection-end-line="32" selection-end-column="53" />
+          <folding>
+            <marker date="1494136868000" expanded="true" signature="528:535" placeholder="SELECT * FRO..." />
+            <marker date="1494136868000" expanded="true" signature="528:577" placeholder="SELECT count..busunusualbus..." />
+            <marker date="1494136868000" expanded="true" signature="528:592" placeholder="SELECT count..busunusualbus..." />
+            <marker date="1494136868000" expanded="true" signature="696:740" placeholder="SELECT * FRO..busunusualbus..." />
+            <marker date="1494136868000" expanded="true" signature="1976:2246" placeholder="INSERT INTO `busaccidentinformation`..." />
+            <marker date="1494136868000" expanded="true" signature="1988:2130" placeholder="/** *列出所有的调度..." />
+            <marker date="1494136868000" expanded="true" signature="2448:2596" placeholder="select name,..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/restful/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0624291">
+          <caret line="180" column="38" selection-start-line="180" selection-start-column="38" selection-end-line="180" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>

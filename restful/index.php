@@ -22,6 +22,8 @@ class restful
 
     private $_id;
 
+    private $_query;
+
     /*
      * 常用到的状态码
      */
@@ -93,9 +95,12 @@ class restful
         if(!empty($res[3])){
             $this->_id = $res[3];
         }
-    }
 
-    /*
+        if(!empty($res[4])){
+            $this->_query = $res[4];
+        }
+    }
+/*
      * 当资源为用户的时候调用
      */
     private function _handleUser(){
@@ -105,16 +110,18 @@ class restful
 
         $body = $this->_getBodyParams();
 
-        if(empty($body['username'])){
-            throw new Exception("用户名不能为空",404);
-        }
-        if(empty($body['password'])){
+        if(empty($body['username'])){ throw new Exception("用户名不能为空",404); } if(empty($body['password'])){
             throw new Exception("密码不能为空",404);
         }
 
         return $this->_user->login($body['username'],$body['password']);
     }
 
+    /**
+     * 获取页面内容, 可以获得 post请求之类的东西
+     * @return mixed
+     * @throws Exception
+     */
     private function _getBodyParams(){
         $raw = file_get_contents("php://input");
         if(empty($raw)){
@@ -123,6 +130,12 @@ class restful
         return json_decode($raw,true);
     }
 
+
+    /**
+     * 将数据用json格式输出
+     * @param $array
+     * @param int $code
+     */
     private function _json($array,$code=0){
         if($code !=200 && $code !=204 && $code>0){
             header("HTTP/1.1 ".$code." ".$this->_statusCode[$code]);
@@ -132,11 +145,37 @@ class restful
         exit();
     }
 
+    /**
+     * 当请求的资源为Messages的时候调用此方法
+     * @throws Exception
+     */
     private function _handleMessage(){
-
+        switch($this->_requestMethod){
+            case 'PUT':
+                $this->_putMessage();
+                break;
+            case 'GET':
+                $this->_getMessage();
+                break;
+            default:
+                $this->_getMessage();
+        }
     }
 
-
+    /**
+     * 以 $page 的要求获取指定页面的请求;返回 数据和 总数据数
+     * @throws Exception
+     */
+    private function _getMessage(){
+        $busId = $this->_id;
+        $page = $this->_query;
+        if(empty($busId)){
+            throw new Exception("班车号不得为空",405);
+        }
+        $totalPage = $this->_message->getMessage($busId);
+        $totalPage = $totalPage['totalPage'];
+        echo $this->_json(['data'=>$this->_message->getMessage($busId,$page),'totalPage'=>$totalPage],200);
+    }
 }
 
 $db = new db($dsn,$username,$password);

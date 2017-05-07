@@ -24,8 +24,14 @@ class Messages
      * 获取调度信息
      * @param $busId
      */
-    public function getMessage($busId){
-
+    public function getMessage($busId,$page=null){
+        if($page === null){
+            $sql = "SELECT count(*) as totalPage FROM `busunusualbus` WHERE `busId`=$busId";
+            return $this->_db->Query($sql,'single',false);
+        }else {
+            $sql = "SELECT * FROM `busunusualbus` WHERE `busId`=$busId";
+            return $this->_db->GetList($sql, $page, 10, false);
+        }
     }
 
     /**
@@ -35,7 +41,7 @@ class Messages
      * @param $crewId 报告人Id
      */
 
-    public function reportMessage(array $mes, $type, $crewId){
+    public function reportMessage(array $mes, $type){
         if(empty($mes)){
             throw new Exception("故障信息不能为空!");
         }
@@ -47,13 +53,13 @@ class Messages
         }
 
         if($type == 1){
-            $this->_busAccident($mes, $crewId);
+            $this->_busAccident($mes);
         }else {
             $this->_busBlock();
         }
     }
 
-    private function _busAccident(array $mes, $crewId){
+    private function _busAccident($args){
         /**
          * $mes = [
          *      "busId" = ' ',         车辆id
@@ -67,18 +73,9 @@ class Messages
          */
 
         //将$mes数组转化成变量
-        $str = '';
-        foreach($mes as $k => $v){
-            $str .= ",'".$v."'";
-        }
-        $str = substr($str,1);
-        try {
-            $sql = "INSERT INTO `busaccidentinformation`(`time`,`busId`,`accidentDegree`,`accidentLocation`,`lineId`,`accidentContent`,`report`) VALUES $str";
-            $this->_db->Query($sql, 'single', true);
-        }catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-
+        $createdTime = Date('Y-m-d H:i:s');
+        $args['createdTime'] = $createdTime;
+        $this->_db->Insert(`busaccidentinformation`,$args);
     }
 
 

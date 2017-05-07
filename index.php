@@ -10,8 +10,6 @@ $db = new db($dsn,$username,$password);
 $user = new user($db);
 $mes = new Messages($db);
 
-$db->Insert('busaccidentinformation','','');
-
 
 
 
