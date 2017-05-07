@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
 	<meta charset="UTF-8">
 	<title></title>
@@ -17,6 +17,7 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="" onclick="Modal.carInfo();return false;">车辆信息</a></li>
+                <li><a href="#" onclick="Modal.repMes();return false;">报告路况</a></li>
 				<li><a href="#">查看调度信息</a></li>
 				<li><a href="#">查看历史调度信息</a></li>
 				<li><a href="#" onclick="Modal.getAllMes();return false;">查看历史车况</a></li>
@@ -28,7 +29,27 @@
     </nav>
 
     <div class="container">
-
+        <div class="row">
+            <div class="col-md-12" style="background:#d0e9c6;">
+                <div class="col-md-3" style=" padding-top:25px;height: 300px; display:block">
+                    <img src="../img/1.jpeg" alt="" style="position:relative;width:80%;left:10px;">
+                </div>
+                <div class="col-md-9">
+                    <h3 style="padding-top:10px">员工信息:</h3>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12" style="height:300px;background:#ccc">
+                <div class="col-md-3" style=" padding-top:25px;height: 300px; display:block">
+                    <img src="../img/1.jpeg" alt="" style="position:relative;width:80%;left:10px;">
+                </div>
+                <div class="col-md-9">
+                    <h3 style="padding-top:10px">车辆信息:</h3>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- 查看车辆信息 -->
     <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="carInfo" aria-labelledby="myLargeModalLabel">
@@ -39,6 +60,52 @@
                 </div>
 				<div class="modal-body">
 				</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 报告路况 -->
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="repMes" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 style="text-align:center">报告路况信息</h1>
+                </div>
+                <div class="modal-body">
+                    <label for="">请选择报告类型:</label>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span id="rep">请选择.. </span><span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" onclick="Modal.change('1');return false;">报告路面事故</a></li>
+                            <li><a href="#" onclick="Modal.change('2');return false;">报告路面拥堵</a></li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <form action="">
+                        <label for="" id="degree">拥堵程度:</label>
+                        <label class="radio radio-inline" style="padding-left: 30px;margin-top:0">
+                            <input type="radio" value="1" name="optionsRadios" id="option1">轻微拥堵:
+                        </label>
+                        <label class="radio radio-inline" style="padding-left: 20px;">
+                            <input type="radio" value="2" name="optionsRadios" id="option2">中度拥堵:
+                        </label>
+                        <label class="radio radio-inline" style="padding-left: 20px;">
+                            <input type="radio" value="3" name="optionsRadios" id="option3">严重拥堵:
+                        </label>
+                        <br>
+                        <hr>
+                        <label for="" id="reason" >拥堵原因:</label>
+                        <input type="text" required class="form-control"/>
+                        <hr>
+                        <label for="">报告者:</label>
+                        <input type="text" required class="form-control"/>
+                        <hr>
+                        <button class="btn btn-success" type="submit" onsubmit="Modal.succMes();">提交报告</button>
+                        <button class="btn btn-default" type="reset">清空报告</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -87,6 +154,34 @@
 		Modal.tag3 = 0;
 		Modal.tag4 = 0;
 		Modal.runtime = 0;
+
+        Modal.succMes = function () {
+
+        }
+
+        Modal.change = function (value){
+            var tag = 0;
+            if(value == 1){
+                $("#rep").html("报告路面拥堵");
+                (function(){
+                    $("#degree").html("拥堵程度:");
+                    $("#reason").html("拥堵原因:")
+                })();
+            }else{
+                $("#rep").html("报告路面事故");
+                (function(){
+                    $("#degree").html("事故类型:");
+                    $("#reason").html("事故原因:")
+                })();
+            }
+        }
+
+        Modal.repMes = function(){
+
+            $("#repMes").modal({ keyboard:true
+            })
+        }
+
 
 		Modal.carInfo = function(){
 			if(Modal.tag1 ==0) {
@@ -157,7 +252,6 @@
 							}
 							$("#getAllMes #mes").append("<tr id='busId'><td>" + item.unusualTypeId + "</td><td>" + createdTime + "</td><td>" + dgt + "</td><td>" + item.lineId + "</td><td>" + item.local + "</td><td>" + item.reason + "</td></tr>");
 						})
-
 					},
 					error: function () {
 						alert('error1');
@@ -168,7 +262,6 @@
 				keyboard:true
 			});
 		}
-
 	</script>
 </body>
 </html>
