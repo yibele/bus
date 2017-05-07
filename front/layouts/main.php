@@ -102,7 +102,7 @@
                         <label for="">报告者:</label>
                         <input type="text" required class="form-control"/>
                         <hr>
-                        <button class="btn btn-success" type="submit" onsubmit="Modal.succMes();">提交报告</button>
+                        <button class="btn btn-success" type="submit" onclick="Modal.succMes();return false;">提交报告</button>
                         <button class="btn btn-default" type="reset">清空报告</button>
                     </form>
                 </div>
@@ -177,8 +177,8 @@
         }
 
         Modal.repMes = function(){
-
-            $("#repMes").modal({ keyboard:true
+            $("#repMes").modal({
+				keyboard:true
             })
         }
 
@@ -194,7 +194,6 @@
 						"password": "001"
 					}),
 					success: function (data) {
-						alert(JSON.stringify(data));
 						$("#carInfo .modal-body").append("<p>" + JSON.stringify(data) + "</p>");
 						Modal.tag1 += 1;
 					},
