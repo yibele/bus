@@ -11,7 +11,9 @@ class db
     private $_dsn;
     private $_username;
     private $_password;
+    private $_job;
     private static $_db;
+
 
     public function __construct($dsn,$username,$password)
     {
@@ -33,19 +35,7 @@ class db
     /*
      * 数据库连接方法
      */
-    public function connect(){
-        if(isset(self::$_db)){
-            self::$_db->query('SET names utf8');
-            return self::$_db;
-        }else{
-            try {
-                self::$_db = new PDO($this->_dsn, $this->_username, $this->_password);
-                return self::$_db;
-            }catch (PDOException $e){
-                echo 'Connection failed:' . $e->getMessage();
-            }
-        }
-    }
+
     /**
      * 执行query操作, 如果
      */
@@ -77,6 +67,47 @@ class db
         $page = $page < 0 ? 0 : $page;
         $sql .= " LIMIT ".$page.",".$offset;
         return $this->Query($sql,'many',false);
+    }
+
+    /**
+     * @param $table     要插入的数据表
+     * @param $arr       插入信息的数组
+     * @param bool|false $debug
+     */
+    public function Insert($table, $args, $debug = false){
+        $this->_checkFields($table, $args);
+        $sql = '';
+        foreach($args as $k=>$v){
+            $sql .=",`$k`='$v'";
+        }
+        $sql = substr($sql,1);
+        $sql = "INSERT INTO `$table` SET `$sql`";
+        if($debug){
+            exit($sql);
+        }
+        if(self::$_db->exec($sql)){
+            return self::$_db->lastInsertId();
+        }
+        return false;
+    }
+
+    private function _checkFields($table, $args){
+        $fields = $this->_getFields($table);
+        foreach($args as $k=>$v){
+            if(!in_array($k,$fields)){
+                exit("Mysql Qeury Error: unKown column '$k' in fileds list");
+            }
+        }
+    }
+
+    private function _getFields($table){
+        $fields = array();
+        $this->_job = self::$_db->query("SHOW COLUMNS FROM $table");
+        $res = $this->_job->fetchAll(PDO::FETCH_ASSOC);
+        foreach($res as $value){
+            $fields[] = $value['Field'];
+        }
+        return $fields;
     }
 }
 

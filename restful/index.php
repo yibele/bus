@@ -132,6 +132,11 @@ class restful
         exit();
     }
 
+    private function _handleMessage(){
+
+    }
+
+
 }
 
 $db = new db($dsn,$username,$password);

@@ -9,21 +9,87 @@ require_once __DIR__.'/db.php';
  */
 class Messages
 {
+    private $repCode =[
+        '1'=>'accidentInformation',    //车辆路面拥堵信息表
+        '2'=>'blockInformation',       //车辆路面故障信息表
+    ];
+    //数据库句柄
     private $_db;
-
     public function __construct($db)
     {
         $this->_db = $db;
     }
 
+    /**
+     * 获取调度信息
+     * @param $busId
+     */
     public function getMessage($busId){
 
     }
 
-    public function reportMessage($mes, $crewId){
+    /**
+     * 报告路面故障
+     * @param $mes   故障信息
+     * @param $type  故障类型
+     * @param $crewId 报告人Id
+     */
+
+    public function reportMessage(array $mes, $type, $crewId){
+        if(empty($mes)){
+            throw new Exception("故障信息不能为空!");
+        }
+        if(empty($type) || !in_array($type,[1,2])){
+            throw new Exception("报告类型错误,请检查");
+        }
+        if(empty($crewId)){
+            throw new Exception("报告人Id不能为空!");
+        }
+
+        if($type == 1){
+            $this->_busAccident($mes, $crewId);
+        }else {
+            $this->_busBlock();
+        }
+    }
+
+    private function _busAccident(array $mes, $crewId){
+        /**
+         * $mes = [
+         *      "busId" = ' ',         车辆id
+         *      "accidentDegree" = '', 事故类型
+         *      "accidentLocation" = '', 事故地点
+         *      "lineId" = '',         班车线路
+         *      "accidentContent" = '',  事故描述
+         *      "time" =            故障时间
+         *      "report" = "",      报告人
+         * ]
+         */
+
+        //将$mes数组转化成变量
+        $str = '';
+        foreach($mes as $k => $v){
+            $str .= ",'".$v."'";
+        }
+        $str = substr($str,1);
+        try {
+            $sql = "INSERT INTO `busaccidentinformation`(`time`,`busId`,`accidentDegree`,`accidentLocation`,`lineId`,`accidentContent`,`report`) VALUES $str";
+            $this->_db->Query($sql, 'single', true);
+        }catch (PDOException $e) {
+            echo $e->getMessage();
+        }
 
     }
 
+
+    /**
+     *列出所有的调度信息
+     * @param $busId
+     * @param int $page
+     * @param int $size
+     * @return mixed
+     * @throws Exception
+     */
     public function listMessage($busId ,$page =1, $size=1){
         if($size>100){
             throw new Exception("分页大小最大值为100");
