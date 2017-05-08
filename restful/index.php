@@ -62,7 +62,7 @@ class restful
             $this->_setupRequestMethod();
             $this->_setResrouces();
             if($this->_resourceName == 'users'){
-               $this->_json(['data'=>$this->_handleUser()],200);
+                return $this->_json($this->_handleUser(),200);
             }elseif($this->_resourceName == 'messages'){
                 $this->_handleMessage();
             }
@@ -113,8 +113,8 @@ class restful
         if(empty($body['username'])){ throw new Exception("用户名不能为空",404); } if(empty($body['password'])){
             throw new Exception("密码不能为空",404);
         }
-
-        return $this->_user->login($body['username'],$body['password']);
+        $arr = $this->_user->login($body['username'],$body['password']);
+        return $arr;
     }
 
     /**
@@ -151,7 +151,7 @@ class restful
      */
     private function _handleMessage(){
         switch($this->_requestMethod){
-            case 'PUT':
+            case 'POST':
                 $this->_putMessage();
                 break;
             case 'GET':

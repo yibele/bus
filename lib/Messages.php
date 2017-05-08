@@ -35,6 +35,15 @@ class Messages
     }
 
     /**
+     * 报告路况信息
+     * @param $busId
+     * @param $args
+     */
+    public function putMessage($busId, $args){
+
+    }
+
+    /**
      * 报告路面故障
      * @param $mes   故障信息
      * @param $type  故障类型

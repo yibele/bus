@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__.'/../../lib/checkLogin.php';
+unset($_SESSION['password']);
+print_r($_SESSION);
+?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -60,6 +65,18 @@
                 </div>
 				<div class="modal-body">
 				</div>
+            </div>
+        </div>
+    </div>
+    <!-- 请登录 -->
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="Login" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1>请登录</h1>
+                </div>
+                <div class="modal-body">
+                </div>
             </div>
         </div>
     </div>
@@ -147,6 +164,7 @@
 	</div>
 
 	<script>
+
 		var Modal = new Object();
 		//ajax请求是否执行过一次的标记.如果tags != 0 那么success请求将不会在执行
 		Modal.tag1 = 0;

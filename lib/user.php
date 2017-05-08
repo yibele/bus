@@ -22,9 +22,22 @@ class user
         $sql = "SELECT * FROM `Buscrew` WHERE name='".$username."' AND password='".$password."'";
         $res = $this->_db->Query($sql,'single',false);
         if(!$res){
-            throw new Exception("用户名或者密码错误");
+            throw new Exception("用户名或者密码错误",404);
+        }else {
+            $sid = $this->_setSession($res);
+            return ["sid" => $sid, 'res' => $res];
         }
-        return $res;
+    }
+
+    private function _setSession($res){
+        session_cache_limiter("private");
+        session_start();
+        $sid = session_id();
+        foreach($res as $k => $v){
+            $_SESSION[$k] = $v;
+        }
+        $_SESSION['sid'] = $sid;
+        return $sid;
     }
 }
 
