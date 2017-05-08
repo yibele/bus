@@ -10,6 +10,6 @@ $engin = 'mysql';
 $host = '127.0.0.1';
 $dbname = 'BusDispath';
 $username = 'root';
-$password = '';
+$password = 'wo19540424';
 $dsn = "mysql:host=".$host.";dbname=".$dbname;
 

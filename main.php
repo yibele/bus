@@ -1,8 +1,6 @@
 <?php
 require_once "./lib/checkLogin.php";
-unset($_SESSION['password']);
-print_r($_SESSION);
-?>
+ ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>

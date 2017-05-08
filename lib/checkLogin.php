@@ -7,13 +7,13 @@
  */
 
 session_cache_expire(600);
-if($_REQUEST["sid"]==null){
+if($_GET["sid"]==null){
     session_destroy();
     header("Location:login.php");
 }
-session_id($_REQUEST["sid"]);
+session_id($_GET["sid"]);
 session_start();
-if($_SESSION['busId'] == '' || $_SESSION["name"] == ""){
+if($_SESSION['id'] == '' || $_SESSION["name"] == ""){
     session_destroy();
     header("Location:login.php");
 }
