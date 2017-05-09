@@ -1,6 +1,6 @@
 <?php
 require_once "./lib/checkLogin.php";
- ?>
+?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -36,9 +36,7 @@ require_once "./lib/checkLogin.php";
             <div class="col-md-12" style="background:#d0e9c6;">
                 <div class="col-md-3" style=" padding-top:25px;height: 300px; display:block">
                     <img src="./front/img/1.jpeg" alt="" style="position:relative;width:80%;left:10px;">
-                </div>
-                <div class="col-md-9">
-                    <h3 style="padding-top:10px">员工信息:</h3>
+                </div> <div class="col-md-9"> <h3 style="padding-top:10px">员工信息:</h3>
                 </div>
             </div>
         </div>
@@ -66,18 +64,6 @@ require_once "./lib/checkLogin.php";
             </div>
         </div>
     </div>
-    <!-- 请登录 -->
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="Login" aria-labelledby="myLargeModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1>请登录</h1>
-                </div>
-                <div class="modal-body">
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- 报告路况 -->
     <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="repMes" aria-labelledby="myLargeModalLabel">
@@ -94,8 +80,7 @@ require_once "./lib/checkLogin.php";
                         </button>
                         <ul class="dropdown-menu">
                             <li><a href="#" onclick="Modal.change('1');return false;">报告路面事故</a></li>
-                            <li><a href="#" onclick="Modal.change('2');return false;">报告路面拥堵</a></li>
-                        </ul>
+                            <li><a href="#" onclick="Modal.change('2');return false;">报告路面拥堵</a></li> </ul>
                     </div>
                     <hr>
                     <form action="">
@@ -148,7 +133,7 @@ require_once "./lib/checkLogin.php";
 						</tbody>
 					</table>
 				</div>
-				<nav aria-label="Page navigation">
+				<nav aria-label="Page navigation" style="padding-left:25%;">
 					<ul class="pagination" id="pagination">
 						<li>
 							<a href="#" aria-label="Previous">
@@ -170,6 +155,7 @@ require_once "./lib/checkLogin.php";
 		Modal.tag3 = 0;
 		Modal.tag4 = 0;
 		Modal.runtime = 0;
+        var busId = <?php echo $_SESSION['id']?>;
 
         Modal.succMes = function () {
 
@@ -199,6 +185,7 @@ require_once "./lib/checkLogin.php";
         }
 
 
+        /**
 		Modal.carInfo = function(){
 			if(Modal.tag1 ==0) {
 				$.ajax({
@@ -206,8 +193,8 @@ require_once "./lib/checkLogin.php";
 					url: './restful/users',
 					dataType: "json",
 					data: JSON.stringify({
-						"username": "韩世荣",
-						"password": "001"
+                        "username": <?php echo $_SESSION['name']?>,
+                        "password": <?php echo '00'.$_SESSION['id']?>
 					}),
 					success: function (data) {
 						$("#carInfo .modal-body").append("<p>" + JSON.stringify(data) + "</p>");
@@ -222,7 +209,7 @@ require_once "./lib/checkLogin.php";
 				keyboard:true
 			});
 		};
-
+        */
 
 		Modal.pagination = function () {
 			if((Modal.totalPage%10) ==0){
@@ -230,6 +217,10 @@ require_once "./lib/checkLogin.php";
 			}else{
 				Modal.pageNum = Math.floor(Modal.totalPage/10)+1;
 			}
+            if(Modal.pageNum>10){
+                Modal.pageNum = 10;
+            }
+                
 			for(var i = 1;i<=Modal.pageNum;i++){
 				$("#pagination").append("<li><a href='' onclick='Modal.getAllMes("+i+");Modal.tag2 = 0 ;return false;'>"+i+"</a></li>");
 			}
@@ -241,7 +232,7 @@ require_once "./lib/checkLogin.php";
 				Modal.tag2 +=1;
 				$.ajax({
 					method: "GET",
-					url: './restful/messages/1/' + page,
+					url: './restful/messages/'+busId+'/' + page,
 					dataType: 'json',
 					success: function (data) {
 						Modal.totalPage = data.totalPage;
@@ -252,6 +243,34 @@ require_once "./lib/checkLogin.php";
 						$.each(data.data, function (index, item) {
 							var dgt;  //故障程度
 							var createdTime = item.createdTime ? item.createdTime.substr(0, 10) : item.createdTime;
+                            var Typeid = item.unusualTypeId;
+                            switch(Typeid){
+                            case '1': Typeid = '车门异常';
+                            break;
+                            case '2': Typeid = '胎压异常';
+                            break;
+                            case '3': Typeid = '燃油量异常';
+                            break;
+                            case '4': Typeid = '发动机异常';
+                            break;
+                            case '5': Typeid = '车问异常';
+                            break;
+                            case '6': Typeid = '车速异常';
+                            break;
+                            case '7': Typeid = '私自绕行';
+                            break;
+                            case '8': Typeid = '私自甩站';
+                            break;
+                            case '9': Typeid = '虚开班次';
+                            break;
+                            case '10': Typeid = '首末班车发车异常';
+                            break;
+                            case '11': Typeid = '校区附近车辆异常';
+                            break;
+                            case '12': Typeid = '车站客流量异常';
+                            break;
+                            default: Typeid = '正常异常';
+                            }
 							switch (item.degreeType) {
 								case "1":
 									dgt = "低";
@@ -265,7 +284,7 @@ require_once "./lib/checkLogin.php";
 								default:
 									dgt = "低";
 							}
-							$("#getAllMes #mes").append("<tr id='busId'><td>" + item.unusualTypeId + "</td><td>" + createdTime + "</td><td>" + dgt + "</td><td>" + item.lineId + "</td><td>" + item.local + "</td><td>" + item.reason + "</td></tr>");
+							$("#getAllMes #mes").append("<tr id='busId'><td>" + Typeid + "</td><td>" + createdTime + "</td><td>" + dgt + "</td><td>" + item.lineId + "</td><td>" + item.local + "</td><td>" + item.reason + "</td></tr>");
 						})
 					},
 					error: function () {

@@ -19,6 +19,8 @@ class user
         if(empty($username)){
             throw new Exception("用户名不能为空");
         }
+        $username = trim($username);
+        $password = trim($password);
         $sql = "SELECT * FROM `buscrew` WHERE name='".$username."' AND password='".$password."'";
         $res = $this->_db->Query($sql,'single',false);
         if(!$res){
@@ -35,6 +37,7 @@ class user
         foreach($res as $k => $v){
             $_SESSION[$k] = $v;
         }
+
         $_SESSION['sid'] = $sid;
         return $sid;
     }
