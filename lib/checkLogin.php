@@ -13,6 +13,7 @@ if($_GET["sid"]==null){
 }
 session_id($_GET["sid"]);
 session_start();
+$_SESSION['sid']  = $_GET['sid'];
 if($_SESSION['id'] == '' || $_SESSION["name"] == ""){
     session_destroy();
     header("Location:login.php");

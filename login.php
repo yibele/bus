@@ -30,8 +30,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
-            <div class="col-md-4 col-md-offset-4 login">
+    <div class="container"> <div class="col-md-4 col-md-offset-4 login">
                 <form action="" method="post">
                     <h3 style="text-align:center">乘务员登陆</h3>
                     <hr>
@@ -62,8 +61,8 @@
                success: function (data) {
                    window.location.href="./main.php?sid="+data.sid;
                },
-               error: function () {
-                   alert("用户名或者密码错误");
+               error: function (data) {
+                   alert(JSON.stringify(data));
                }
            });
            }

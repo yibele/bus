@@ -26,7 +26,7 @@ require_once "./lib/checkLogin.php";
 				<li><a href="#" onclick="Modal.getAllMes();return false;">查看历史车况</a></li>
 			</ul>
 			<ul class='nav navbar-nav navbar-right'>
-				<li><a href="">退出</a></li>
+				<li><a href="<?php echo "./lib/logOut.php?sid=".$_SESSION['sid']?>">退出</a></li>
 			</ul>
 		</div>
     </nav>
@@ -150,8 +150,7 @@ require_once "./lib/checkLogin.php";
 
 		var Modal = new Object();
 		//ajax请求是否执行过一次的标记.如果tags != 0 那么success请求将不会在执行
-		Modal.tag1 = 0;
-		Modal.tag2 = 0;
+		Modal.tag1 = 0; Modal.tag2 = 0;
 		Modal.tag3 = 0;
 		Modal.tag4 = 0;
 		Modal.runtime = 0;
