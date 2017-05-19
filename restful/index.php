@@ -41,12 +41,12 @@ class restful
     /*
      * 允许请求的资源列表
      */
-    private $_allowResources = ['users','messages'];
+    private $_allowResources = ['users','messages','dispMes'];
 
     /*
      * 允许请求的方法
      */
-    private $_allowRequestMethods = ['GET','PUT','POST','DELETE','OPTIONS'];
+    private $_allowRequestMethods = ['GET','POST'];
 
     public function __construct(user $user,Messages $message)
     {
@@ -64,7 +64,9 @@ class restful
             if($this->_resourceName == 'users'){
                 return $this->_json($this->_handleUser(),200);
             }elseif($this->_resourceName == 'messages'){
-                $this->_handleMessage();
+                return $this->_json($this->_handleMessage(),200);
+            }else{
+                return $this->_json($this->_handleDispMes(),200);
             }
         }catch (Exception $e){
             $this->_json(['error'=>$e->getMessage()],$e->getCode());
@@ -110,7 +112,8 @@ class restful
 
         $body = $this->_getBodyParams();
 
-        if(empty($body['username'])){ throw new Exception("用户名不能为空",404); } if(empty($body['password'])){
+        if(empty($body['username'])){ throw new Exception("用户名不能为空",404); }
+        if(empty($body['password'])){
             throw new Exception("密码不能为空",404);
         }
         $arr = $this->_user->login($body['username'],$body['password']);
@@ -128,7 +131,7 @@ class restful
             throw new Exception("请求参数错误",404);
         }
         return json_decode($raw,true);
-    }
+}
 
 
     /**
@@ -152,14 +155,41 @@ class restful
     private function _handleMessage(){
         switch($this->_requestMethod){
             case 'POST':
-                $this->_putMessage();
+                return $this->_postMessage();
                 break;
             case 'GET':
                 $this->_getMessage();
                 break;
             default:
-                $this->_getMessage();
+                throw new Exception("请求方法错误",404);
         }
+    }
+
+    /**
+     * 处理调度信息
+     */
+    private function _handleDispMes(){
+        switch($this->_requestMethod){
+            case 'GET':
+                return $this->_getDispMes();
+                break;
+            default:
+                throw new Exception("请求方法错误",404);
+        }
+    }
+
+    /**
+     * 获取调度信息
+     */
+    private function _getDispMes(){
+        $busId = $this->_id;
+        if($busId === null){
+            throw new Exception("班车号不得为空",405);
+        }
+        $arr = $this->_message->getDispMes($busId);
+
+        $count = count($arr);
+        return ['data'=>$arr,'count'=>$count];
     }
 
     /**
@@ -175,6 +205,15 @@ class restful
         $totalPage = $this->_message->getMessage($busId);
         $totalPage = $totalPage['totalPage'];
         echo $this->_json(['data'=>$this->_message->getMessage($busId,$page),'totalPage'=>$totalPage],200);
+    }
+
+    private function _postMessage(){
+        $body = $this->_getBodyParams();
+        $type =$body['type'];
+        unset($body['type']);
+        if($this->_message->reportMessage($body,$type)){
+            return ['data'=>"报告成功!"];
+        };
     }
 }
 

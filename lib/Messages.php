@@ -21,7 +21,7 @@ class Messages
     }
 
     /**
-     * 获取调度信息
+     * 获取历史车况
      * @param $busId
      */
     public function getMessage($busId,$page=null){
@@ -33,6 +33,15 @@ class Messages
             return $this->_db->GetList($sql, $page, 10, false);
         }
     }
+
+    /**
+     * 获取调度信息
+     */
+    public function getDispMes($busId){
+        $sql = "SELECT * FROM `busbusdeal` WHERE `unusualBusId`=$busId";
+        return $this->_db->Query($sql,'many',false);
+    }
+
 
     /**
      * 报告路况信息
@@ -54,20 +63,26 @@ class Messages
         if(empty($mes)){
             throw new Exception("故障信息不能为空!");
         }
-        if(empty($type) || !in_array($type,[1,2])){
+        if(empty($type) || !in_array($type,[1,2,3,4])){
             throw new Exception("报告类型错误,请检查");
-        }
-        if(empty($crewId)){
-            throw new Exception("报告人Id不能为空!");
         }
 
         if($type == 1){
             $this->_busAccident($mes);
-        }else {
-            $this->_busBlock();
+        }else if($type ==2){
+            $this->_busBlock($mes);
+        }else if($type==3){
+            $this->_busUnusual($mes);
+        }else{
+            $this->_busEvent($mes);
         }
+        return true;
     }
 
+    /**
+     * 报告事故    busaccidentinformation 表中
+     * @param $args
+     */
     private function _busAccident($args){
         /**
          * $mes = [
@@ -84,9 +99,35 @@ class Messages
         //将$mes数组转化成变量
         $createdTime = Date('Y-m-d H:i:s');
         $args['createdTime'] = $createdTime;
-        $this->_db->Insert(`busaccidentinformation`,$args);
+        $lastId = $this->_db->Insert('busaccidentinformation',$args);
     }
 
+    /**
+     * 车辆拥堵异常报告   busblockinformation 表中
+     * @param $args
+     */
+    private function _busBlock($args){
+        $createdTime = Date("Y-m-d H:i:s");
+        $args['createdTime'] = $createdTime;
+        $lastId = $this->_db->Insert('busblockinformation',$args);
+    }
+
+
+    /**
+     * 车况异常报告
+     */
+    private function _busUnusual($args) {
+        $args["createdTime"] = Date("Y-m-d H:i:s");
+        $lastId = $this->_db->Insert("busunsualbus",$args);
+    }
+
+    /**
+     * 大型事件报告
+     */
+    private function _busEvents($args) {
+        $args['createdTime'] = Date("Y-m-d H:i:s");
+        $lastId = $this->_db->Insert("busevents",$args);
+    }
 
     /**
      *列出所有的调度信息

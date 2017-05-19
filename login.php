@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="./front/css/app.css">
     <script src="./front/js/jquery.js"></script>
     <script src="./front/js/app.js"></script>
-    <script src="./front/js/carInfo.js"></script> <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="./front/js/carInfo.js"></script>
     <style>
         .spacing-top{
             margin-top:10px;
@@ -35,10 +35,10 @@
                     <h3 style="text-align:center">乘务员登陆</h3>
                     <hr>
                     <label for="username">用户名:</label>
-                    <input type="text" required id="username" name="username" placeholder="username" class="form-control">
+                    <input type="text" data-parsley-required="true" id="username" name="username" placeholder="username" class="form-control">
                     <label for="password" class="spacing-top">密码:</label>
-                    <input type="text" required id="password" name="password" placeholder="password" class="form-control">
-                    <input type="submit" value="登陆" class="btn btn-success spacing-top" onclick="login();">
+                    <input type="text" data-parsley-required="true" id="password" name="password" placeholder="password" class="form-control">
+                    <button class="btn btn-success spacing-top" onclick="login()">登陆</button>
                     <input type="reset" value="重置" class="btn btn-default spacing-top">
                 </form>
             </div>
@@ -51,20 +51,34 @@
                "password": $("#password").val(),
            };
            if(son.username ==''||son.password ==''){
-               return true;
+               alert("用户名或者密码不能为空");
            }else{
-           $.ajax({
-               method: 'POST',
-               url: './restful/users',
-               dataType: "json",
-               data:JSON.stringify(son),
-               success: function (data) {
-                   window.location.href="./main.php?sid="+data.sid;
-               },
-               error: function (data) {
-                   alert(JSON.stringify(data));
+
+               var ajax = new XMLHttpRequest();
+               ajax.open("POST","./restful/users");
+               ajax.setRequestHeader("Content-Type","text/plain;charset=UTF-8");
+               ajax.send(JSON.stringify(son));
+               ajax.onreadystatechange = function(){
+                   if(ajax.readyState == 4){
+                       console.log(ajax.getResponseHeader("Content-Type"));
+                       alert(ajax.responseText);
+                   }
                }
-           });
+
+               /*
+               $.ajax({
+                   method: 'POST',
+                   url: './restful/users',
+                   dataType: "json",
+                   data:JSON.stringify(son),
+                   success: function (data) {
+                       window.location.href="./main.php?sid="+data.sid;
+                   },
+                   error: function (data) {
+                       alert(JSON.stringify(data));
+                   }
+               });
+               */
            }
        }
     </script>

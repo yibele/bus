@@ -10,7 +10,6 @@ require_once "./lib/checkLogin.php";
     <script src="./front/js/jquery.js"></script>
     <script src="./front/js/app.js"></script>
 	<script src="./front/js/carInfo.js"></script>
-	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-static-top">
@@ -21,7 +20,7 @@ require_once "./lib/checkLogin.php";
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="" onclick="Modal.carInfo();return false;">车辆信息</a></li>
                 <li><a href="#" onclick="Modal.repMes();return false;">报告路况</a></li>
-				<li><a href="#">查看调度信息</a></li>
+				<li><a href="#" onclick="Modal.dispMes();return false;">查看调度信息</a></li>
 				<li><a href="#">查看历史调度信息</a></li>
 				<li><a href="#" onclick="Modal.getAllMes();return false;">查看历史车况</a></li>
 			</ul>
@@ -60,6 +59,19 @@ require_once "./lib/checkLogin.php";
                     <h1>modal-header</h1>
                 </div>
 				<div class="modal-body">
+				</div> </div>
+        </div>
+    </div>
+
+    <!-- 查看调度信息 -->
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="dispMes" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 style="text-align:center">查看调度信息</h1>
+                </div>
+				<div class="modal-body">
+
 				</div>
             </div>
         </div>
@@ -70,8 +82,7 @@ require_once "./lib/checkLogin.php";
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 style="text-align:center">报告路况信息</h1>
-                </div>
+                    <h1 style="text-align:center">报告路况信息</h1> </div>
                 <div class="modal-body">
                     <label for="">请选择报告类型:</label>
                     <div class="btn-group">
@@ -79,12 +90,13 @@ require_once "./lib/checkLogin.php";
                         <span id="rep">请选择.. </span><span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="#" onclick="Modal.change('1');return false;">报告路面事故</a></li>
-                            <li><a href="#" onclick="Modal.change('2');return false;">报告路面拥堵</a></li> </ul>
+                            <li><a href="#" onclick="Modal.change('2');return false;">报告路面事故</a></li>
+                            <li><a href="#" onclick="Modal.change('1');return false;">报告路面拥堵</a></li> </ul>
                     </div>
                     <hr>
                     <form action="">
                         <label for="" id="degree">拥堵程度:</label>
+                        <!--
                         <label class="radio radio-inline" style="padding-left: 30px;margin-top:0">
                             <input type="radio" value="1" name="optionsRadios" id="option1">轻微拥堵:
                         </label>
@@ -94,28 +106,46 @@ require_once "./lib/checkLogin.php";
                         <label class="radio radio-inline" style="padding-left: 20px;">
                             <input type="radio" value="3" name="optionsRadios" id="option3">严重拥堵:
                         </label>
+                        -->
+                        <input type="text" required class="form-control" id="accidentDegree" placeholder="1:轻度 2:中度 3:重度" />
                         <br>
                         <hr>
-                        <label for="" id="reason" >拥堵原因:</label>
-                        <input type="text" required class="form-control"/>
+                        <label for="">地点:</label>
+                        <input type="text" id="location" required class="form-control"/>
+                        <hr>
+                        <label for="">线路:</label>
+                        <input type="text" id="lineId" required class="form-control"/>
+                        <hr>
+                        <label for="" >描述:</label>
+                        <input type="text" id="accidentContent" required class="form-control"/>
                         <hr>
                         <label for="">报告者:</label>
-                        <input type="text" required class="form-control"/>
+                        <input type="text" id="report" required class="form-control"/>
                         <hr>
-                        <button class="btn btn-success" type="submit" onclick="Modal.succMes();return false;">提交报告</button>
+                        <button class="btn btn-success" id="submit">提交报告</button>
                         <button class="btn btn-default" type="reset">清空报告</button>
+
+                        <script>
+                            var repMes = {
+                                "location" : $("#location").val(),
+                                "lineId" : $("#lineId").val(),
+                                "Content" : $("#accidentContent").val()
+                            }
+
+                        </script>
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-	<!-- 查看调度信息 -->
+	<!-- 历史车况信息 -->
 	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="getAllMes" aria-labelledby="myLargeModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1>历史车况信息</h1>
+					<h1 style="text-align:center">历史车况信息</h1>
 				</div>
 				<div class="modal-body">
 					<table class="table table-striped">
@@ -147,154 +177,9 @@ require_once "./lib/checkLogin.php";
 	</div>
 
 	<script>
-
-		var Modal = new Object();
-		//ajax请求是否执行过一次的标记.如果tags != 0 那么success请求将不会在执行
-		Modal.tag1 = 0; Modal.tag2 = 0;
-		Modal.tag3 = 0;
-		Modal.tag4 = 0;
-		Modal.runtime = 0;
         var busId = <?php echo $_SESSION['id']?>;
 
-        Modal.succMes = function () {
-
-        }
-
-        Modal.change = function (value){
-            var tag = 0;
-            if(value == 1){
-                $("#rep").html("报告路面拥堵");
-                (function(){
-                    $("#degree").html("拥堵程度:");
-                    $("#reason").html("拥堵原因:")
-                })();
-            }else{
-                $("#rep").html("报告路面事故");
-                (function(){
-                    $("#degree").html("事故类型:");
-                    $("#reason").html("事故原因:")
-                })();
-            }
-        }
-
-        Modal.repMes = function(){
-            $("#repMes").modal({
-				keyboard:true
-            })
-        }
-
-
-        /**
-		Modal.carInfo = function(){
-			if(Modal.tag1 ==0) {
-				$.ajax({
-					method: 'POST',
-					url: './restful/users',
-					dataType: "json",
-					data: JSON.stringify({
-                        "username": <?php echo $_SESSION['name']?>,
-                        "password": <?php echo '00'.$_SESSION['id']?>
-					}),
-					success: function (data) {
-						$("#carInfo .modal-body").append("<p>" + JSON.stringify(data) + "</p>");
-						Modal.tag1 += 1;
-					},
-					error: function () {
-						alert('error');
-					}
-				});
-			}
-			$("#carInfo").modal({
-				keyboard:true
-			});
-		};
-        */
-
-		Modal.pagination = function () {
-			if((Modal.totalPage%10) ==0){
-				Modal.pageNum = Modal.totalPage/10;
-			}else{
-				Modal.pageNum = Math.floor(Modal.totalPage/10)+1;
-			}
-            if(Modal.pageNum>10){
-                Modal.pageNum = 10;
-            }
-                
-			for(var i = 1;i<=Modal.pageNum;i++){
-				$("#pagination").append("<li><a href='' onclick='Modal.getAllMes("+i+");Modal.tag2 = 0 ;return false;'>"+i+"</a></li>");
-			}
-		}
-
-		Modal.getAllMes = function(page=1){
-			if(Modal.tag2 == 0) {
-				$("#getAllMes #mes tr").remove();
-				Modal.tag2 +=1;
-				$.ajax({
-					method: "GET",
-					url: './restful/messages/'+busId+'/' + page,
-					dataType: 'json',
-					success: function (data) {
-						Modal.totalPage = data.totalPage;
-						if(Modal.runtime ==0) {
-							Modal.pagination();
-							Modal.runtime =1;
-						}
-						$.each(data.data, function (index, item) {
-							var dgt;  //故障程度
-							var createdTime = item.createdTime ? item.createdTime.substr(0, 10) : item.createdTime;
-                            var Typeid = item.unusualTypeId;
-                            switch(Typeid){
-                            case '1': Typeid = '车门异常';
-                            break;
-                            case '2': Typeid = '胎压异常';
-                            break;
-                            case '3': Typeid = '燃油量异常';
-                            break;
-                            case '4': Typeid = '发动机异常';
-                            break;
-                            case '5': Typeid = '车问异常';
-                            break;
-                            case '6': Typeid = '车速异常';
-                            break;
-                            case '7': Typeid = '私自绕行';
-                            break;
-                            case '8': Typeid = '私自甩站';
-                            break;
-                            case '9': Typeid = '虚开班次';
-                            break;
-                            case '10': Typeid = '首末班车发车异常';
-                            break;
-                            case '11': Typeid = '校区附近车辆异常';
-                            break;
-                            case '12': Typeid = '车站客流量异常';
-                            break;
-                            default: Typeid = '正常异常';
-                            }
-							switch (item.degreeType) {
-								case "1":
-									dgt = "低";
-									break;
-								case "2":
-									dgt = "中";
-									break;
-								case "3":
-									dgt = "高";
-									break;
-								default:
-									dgt = "低";
-							}
-							$("#getAllMes #mes").append("<tr id='busId'><td>" + Typeid + "</td><td>" + createdTime + "</td><td>" + dgt + "</td><td>" + item.lineId + "</td><td>" + item.local + "</td><td>" + item.reason + "</td></tr>");
-						})
-					},
-					error: function () {
-						alert('error1');
-					}
-				});
-			};
-			$("#getAllMes").modal({
-				keyboard:true
-			});
-		}
 	</script>
+    <script src="./front/js/modal.js"></script>
 </body>
 </html>

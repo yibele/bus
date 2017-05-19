@@ -45,7 +45,7 @@ class db
         }
         try {
             //设置mysql编码为utf8, 不然读取出来的中文会出现乱码
-            self::$_db->query('SET NAMES utf8');
+            self::$_db->query('SET NAMES utf-8');
             $raw = self::$_db->query($sql);
             if ($type == 'single') {
                 $res = $raw->fetch(PDO::FETCH_ASSOC);

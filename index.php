@@ -10,6 +10,10 @@ $db = new db($dsn,$username,$password);
 $user = new user($db);
 $mes = new Messages($db);
 
+$arr = $mes->getDispMes('0');
+
+echo count($arr);
+
 
 
 
